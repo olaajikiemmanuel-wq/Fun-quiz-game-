@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fun Quiz Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #ffecd2, #fcb69f); /* fun gradient background */
+      text-align: center;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    h1 {
+      color: #ff7e5f;
+      text-shadow: 1px 1px 5px #fff;
+    }
+
+    .quiz-container {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+      max-width: 450px;
+      margin: 30px auto;
+    }
+
+    .question {
+      font-size: 22px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .answer-btn {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background: linear-gradient(to right, #ff7e5f, #feb47b);
+      color: white;
+      transition: 0.3s;
+    }
+
+    .answer-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #ff7e5f;
+    }
+
+    #score {
+      font-size: 20px;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #ff7e5f;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔥 Fun Quiz Game 🔥</h1>
+
+  <div class="quiz-container">
+    <div class="question" id="question">Question will appear here</div>
+    <button class="answer-btn" id="answer1"></button>
+    <button class="answer-btn" id="answer2"></button>
+    <button class="answer-btn" id="answer3"></button>
+    <button class="answer-btn" id="answer4"></button>
+    <div id="score"></div>
+  </div>
+
+  <script>
+    // Quiz questions
+    const quiz = [
+      {
+        question: "Which planet is known as the Red Planet?",
+        answers: ["Earth", "Mars", "Jupiter", "Venus"],
+        correct: "Mars"
+      },
+      {
+        question: "What is the largest mammal?",
+        answers: ["Elephant", "Blue Whale", "Giraffe", "Hippopotamus"],
+        correct: "Blue Whale"
+      },
+      {
+        question: "Which programming language is used for web development?",
+        answers: ["Python", "HTML", "C++", "Java"],
+        correct: "HTML"
+      },
+      {
+        question: "What is the capital of France?",
+        answers: ["Berlin", "London", "Paris", "Rome"],
+        correct: "Paris"
+      },
+      {
+        question: "Which gas do plants absorb from the atmosphere?",
+        answers: ["Oxygen", "Carbon Dioxide", "Nitrogen", "Hydrogen"],
+        correct: "Carbon Dioxide"
+      },
+      {
+        question: "What is 9 × 8?",
+        answers: ["72", "81", "64", "69"],
+        correct: "72"
+      },
+      {
+        question: "Who wrote 'Romeo and Juliet'?",
+        answers: ["Shakespeare", "Tolstoy", "Hemingway", "Dickens"],
+        correct: "Shakespeare"
+      },
+      {
+        question: "Which organ pumps blood throughout the body?",
+        answers: ["Lungs", "Liver", "Heart", "Kidney"],
+        correct: "Heart"
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    // Display a question
+    function showQuestion() {
+      const q = quiz[currentQuestion];
+      document.getElementById('question').textContent = q.question;
+      document.getElementById('answer1').textContent = q.answers[0];
+      document.getElementById('answer2').textContent = q.answers[1];
+      document.getElementById('answer3').textContent = q.answers[2];
+      document.getElementById('answer4').textContent = q.answers[3];
+      document.getElementById('score').textContent = "Score: " + score;
+    }
+
+    function checkAnswer(answer) {
+      if(answer === quiz[currentQuestion].correct){
+        score++;
+        alert("✅ Correct!");
+      } else {
+        alert("❌ Wrong! The correct answer was: " + quiz[currentQuestion].correct);
+      }
+      currentQuestion++;
+      if(currentQuestion < quiz.length){
+        showQuestion();
+      } else {
+        alert("🎉 Quiz Finished! Your final score is: " + score + "/" + quiz.length);
+        location.reload(); // restart quiz
+      }
+    }
+
+    document.getElementById('answer1').addEventListener('click', () => checkAnswer(document.getElementById('answer1').textContent));
+    document.getElementById('answer2').addEventListener('click', () => checkAnswer(document.getElementById('answer2').textContent));
+    document.getElementById('answer3').addEventListener('click', () => checkAnswer(document.getElementById('answer3').textContent));
+    document.getElementById('answer4').addEventListener('click', () => checkAnswer(document.getElementById('answer4').textContent));
+
+    // Start quiz
+    showQuestion();
+  </script>
+</body>
+</html>
